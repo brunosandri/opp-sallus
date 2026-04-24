@@ -28,7 +28,8 @@ const Dashboard = () => {
   const [nfts, setNFTs] = useState<NFT[]>([]);
   const [documentos, setDocumentos] = useState<Documento[]>([]);
 
-  const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const BASE_URL =
+    import.meta.env.VITE_API_URL || "https://salusopp-backend-production.up.railway.app";
 
   // Proteção da rota + leitura segura do localStorage
   useEffect(() => {
@@ -44,19 +45,29 @@ const Dashboard = () => {
     setToken(storedToken);
   }, [navigate]);
 
+  const carregarDados = async (userEmail: string) => {
+    try {
+      const [nftsRes, docsRes] = await Promise.all([
+        fetch(`${BASE_URL}/nfts/${encodeURIComponent(userEmail)}`),
+        fetch(`${BASE_URL}/documentos/${encodeURIComponent(userEmail)}`),
+      ]);
+
+      if (!nftsRes.ok || !docsRes.ok) {
+        throw new Error("Falha ao carregar dados do dashboard");
+      }
+
+      const [nftsData, docsData] = await Promise.all([nftsRes.json(), docsRes.json()]);
+      setNFTs(nftsData);
+      setDocumentos(docsData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // Carrega os dados após o email estar disponível
   useEffect(() => {
     if (!email) return;
-
-    fetch(`${BASE_URL}/nfts/${encodeURIComponent(email)}`)
-      .then((res) => res.json())
-      .then(setNFTs)
-      .catch(console.error);
-
-    fetch(`${BASE_URL}/documentos/${encodeURIComponent(email)}`)
-      .then((res) => res.json())
-      .then(setDocumentos)
-      .catch(console.error);
+    carregarDados(email);
   }, [email, BASE_URL]);
 
   const handleLogout = () => {
@@ -152,10 +163,10 @@ const Dashboard = () => {
       <NFTLinkModal
         isOpen={isNFTModalOpen}
         onClose={() => setIsNFTModalOpen(false)}
+        onSuccess={() => email && carregarDados(email)}
       />
     </div>
   );
 };
 
 export default Dashboard;
-

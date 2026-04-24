@@ -13,6 +13,10 @@ NFTS_FILE = os.path.join(BASE_DIR, "../data/nfts.json")
 DOCUMENTOS_FILE = os.path.join(BASE_DIR, "../data/documentos.json")
 BACKUP_DIR = os.path.join(BASE_DIR, "../backups")
 
+
+def normalizar_email(email: str) -> str:
+    return (email or "").strip().lower()
+
 # Funções auxiliares
 def carregar_etapas():
     try:
@@ -31,9 +35,10 @@ def criar_backup():
 @dashboard_bp.route("/nfts/<email>", methods=["GET"])
 def get_nfts_por_email(email):
     try:
+        user_email = normalizar_email(email)
         with open(NFTS_FILE, "r", encoding="utf-8") as f:
             nfts = json.load(f)
-        nfts_usuario = [n for n in nfts if n["email"] == email]
+        nfts_usuario = [n for n in nfts if normalizar_email(n.get("email")) == user_email]
         return jsonify(nfts_usuario)
     except Exception as e:
         return jsonify({"erro": "Falha ao carregar NFTs", "detalhe": str(e)}), 500
@@ -63,11 +68,12 @@ def adicionar_etapa():
 @dashboard_bp.route("/documentos/<email>", methods=["GET"])
 def get_documentos(email):
     try:
+        user_email = normalizar_email(email)
         with open(DOCUMENTOS_FILE, "r", encoding="utf-8") as f:
             documentos = json.load(f)
 
-        docs_gerais = [doc for doc in documentos if doc["email"] == "geral"]
-        docs_usuario = [doc for doc in documentos if doc["email"] == email]
+        docs_gerais = [doc for doc in documentos if normalizar_email(doc.get("email")) == "geral"]
+        docs_usuario = [doc for doc in documentos if normalizar_email(doc.get("email")) == user_email]
 
         return jsonify(docs_gerais + docs_usuario)
     except Exception as e:
@@ -77,14 +83,14 @@ def get_documentos(email):
 @dashboard_bp.route("/vincular-nft", methods=["POST"])
 def vincular_nft():
     try:
-        data = request.get_json()
-        email = data.get("email")
+        data = request.get_json() or {}
+        email = normalizar_email(data.get("email"))
         token_id = data.get("tokenId")
         participacao = data.get("participacao")
-        valorinv = data.get("valorinv")
-        valorcapt = data.get("valorcapt")
+        valorinv = data.get("valorinv") or "A definir"
+        valorcapt = data.get("valorcapt") or "A definir"
 
-        if not all([email, token_id, participacao, valorinv, valorcapt]):
+        if not all([email, token_id, participacao]):
             return jsonify({"error": "Campos obrigatórios faltando"}), 400
 
         # Carregar NFTs existentes
@@ -97,7 +103,6 @@ def vincular_nft():
             "participacao": participacao,
             "valorinv": valorinv,
             "valorcapt": valorcapt
-
         })
 
         # Salvar no arquivo
