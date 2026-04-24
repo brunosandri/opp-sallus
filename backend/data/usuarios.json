@@ -1,0 +1,32 @@
+{
+  "bpressesteixeira@yahoo.com.br": {
+    "senha": "scrypt:32768:8:1$8FIBN3G0TCrwFZrh$db5f53ed1c7c297091daaa4949888c0b96bdb216be128818409a9fffa7c54f5b5c9620ad256bed9de37506c8dc58a9eb97fa3a6384347ab279b59c8883b6ff17"
+  },
+  "luizhrmotta@hotmail.com": {
+    "senha": "scrypt:32768:8:1$VCu6AD1RidJWNlJS$2072ec5afe1dfe532ef12293748b39d2ce88aad69efd5ffaf36cc1c740c5908897d6cb974c82e1eb2c8c14da4fe3374ed3a8e9bc8a2694158edc74e7179506c5"
+  },
+  "ricardo006.usa@hotmail.com": {
+    "senha": "scrypt:32768:8:1$ZOwD7r5Q8rFFeNGy$5ddda8d74632fead3488d76b4310f9bf51afb95827f77da2a3436082066e8901ef0c4da1254a10a72840876a2bb0218d94209a8330dbea0dd004592e85de1fab"
+  },
+  "garibaldigck@gmail.com": {
+    "senha": "scrypt:32768:8:1$wYrbHJaZwkvIXMJQ$176601ffbf3ed3c0f62c8429e6eb5e4bd5a01c21898499d2be6359dedbe6e9fa004e88a44997a66ae9a12b457c37b9013abf822d5439ecf7a7866b8c324cab83"
+  },
+  "witelmar@hotmail.com": {
+    "senha": "scrypt:32768:8:1$ghumjo6kKqrhIs42$45af28c0e180e0e70f0900e0d2dad718890b685660cdf384e1b9226d5251b9c793e15b81826a5cc5369ab41f4fa4611ce3a73841edf2475df721316ae9665218"
+  },
+  "fabiotiepolo@gmail.com": {
+    "senha": "scrypt:32768:8:1$Q9qHWKbnUUE3aW63$2a7a313a0643427de32b046fc27d121d9a04d8ddedcbb62516fd2a226cb53914d9364ba3dd73af3662b4de96983aa1f8720f843c2511a1a2b04b8d8cef95a914"
+  },
+  "sannpinheiro@gmail.com": {
+    "senha": "scrypt:32768:8:1$iv8TYvR6i1Eg30cp$5dfb245c6937b14aeba25197b21a3d83384406c966396302c75f06731d076b56a60fd2488bd9f3fefdffc77437f11b9b686666d05bd83ace4566c9022d682c02"
+  },
+  "edsonlima@me.com": {
+    "senha": "scrypt:32768:8:1$FyOfnvFMNDpVYVFW$a1ada26193a7abcf5ce5c18eb59684348242efed488c86d0cd911a341cf192e2942247cb935b5e10ed4f33733a5d2bcadd806d1f47548a3eb02dbddde3a227d4"
+  },
+  "cleonicemallmann19@gmail.com": {
+    "senha": "scrypt:32768:8:1$XKaHrbtLQ52ysGaF$268543285ba7095644796fc66bf5fa32d09cf04d6b819f0a2d092111db0d722f63529a6fee444e1f6f150c58fd55616ab7d6d99ed6864974fc60ee34aef3b0ff"
+  },
+  "fernandazucatelli@yahoo.com.br": {
+    "senha": "scrypt:32768:8:1$yLW9hpoCjBvBj8hh$f24d35c4eed2a4dde52f9fdf1e0a2b1d0056a3afaff6c3b7d741e572c386b7233a6df339d9d380c58427ce9f55928bae720e4afedbaae76805bb67a816573eb0"
+  }
+}
