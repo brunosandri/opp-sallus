@@ -17,11 +17,14 @@ const Login = () => {
   const [erro, setErro] = useState("");
   const navigate = useNavigate();
 
+  const BASE_URL =
+    import.meta.env.VITE_API_URL || "https://salusopp-backend-production.up.railway.app";
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://salusopp-backend-production.up.railway.app/login", {
+      const res = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -31,7 +34,7 @@ const Login = () => {
 
       if (res.ok && data.token) {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("email", email);
+        localStorage.setItem("email", data.email || email.trim().toLowerCase());
         navigate("/dashboard");
       } else {
         setErro("Email ou senha inválidos.");
