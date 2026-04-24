@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { LogOut, Plus, TrendingUp, Wallet } from "lucide-react";
@@ -45,7 +45,7 @@ const Dashboard = () => {
     setToken(storedToken);
   }, [navigate]);
 
-  const carregarDados = async (userEmail: string) => {
+  const carregarDados = useCallback(async (userEmail: string) => {
     try {
       const [nftsRes, docsRes] = await Promise.all([
         fetch(`${BASE_URL}/nfts/${encodeURIComponent(userEmail)}`),
@@ -62,13 +62,13 @@ const Dashboard = () => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [BASE_URL]);
 
   // Carrega os dados após o email estar disponível
   useEffect(() => {
     if (!email) return;
     carregarDados(email);
-  }, [email, BASE_URL]);
+  }, [email, carregarDados]);
 
   const handleLogout = () => {
     localStorage.clear();

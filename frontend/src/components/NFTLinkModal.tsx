@@ -16,7 +16,8 @@ const NFTLinkModal = ({ isOpen, onClose, onSuccess }: Props) => {
   const [mensagem, setMensagem] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const BASE_URL =
+    import.meta.env.VITE_API_URL || "https://salusopp-backend-production.up.railway.app";
   const email = localStorage.getItem("email");
 
   const handleSubmit = async () => {
